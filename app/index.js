@@ -4,13 +4,11 @@ let angular = require('angular');
 require('angular-route');
 
 require(__dirname + '/parks/parks.js');
-require(__dirname + '/users/users.js');
+require(__dirname + '/users/user.js');
 
 let app = angular.module('app',
   [
-    'users'
-     ,'parks'
-     ,'ngRoute'
+    'ngRoute'
   ]
  );
 
@@ -20,7 +18,7 @@ app.config(['$routeProvider', function(router){
    .when('/signup', {
      controller: 'UsersController',
      controllerAs: 'usersctrl',
-     templateUrl: 'signup-in.html'
+     templateUrl: 'signup_in.html'
    })
    .when('/home', {
      controller: 'ParksController',

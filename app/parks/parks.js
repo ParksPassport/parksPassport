@@ -19,6 +19,11 @@ app.controller('ParksController', ['AuthService','$http', '$location', 'ErrorSer
       }
     })
     .then(function (result) {
+
+
+
+
+
       vm.error = ErrorService(null);
       vm.parks = result.data;
     }, (err) => {
