@@ -12,7 +12,8 @@ var sources = {
   html: __dirname + '/app/layout/*.html',
   js:   __dirname + '/app/index.js',
   test: __dirname + '/test/*_spec.js',
-  css:  __dirname + '/app/style/*.css'
+  css:  __dirname + '/app/style/*.css',
+  img:  __dirname + '/app/style/images/*.jpg'
 };
 
 var runCommand = function(command) {
@@ -84,10 +85,15 @@ gulp.task('copycss', function () {
   .pipe(gulp.dest('./build'));
 });
 
+gulp.task('images',function() {
+  return gulp.src(sources.img)
+  .pipe(gulp.dest('./build'));
+});
+
 gulp.task('bundle:test', () => {
   return gulp.src(sources.test)
   .pipe(webpack({output: {filename:'test_bundle.js'}}))
   .pipe(gulp.dest('./test'));
 });
 
-gulp.task('default', ['lint', 'webpack', 'bundle:dev', 'copy', 'copycss']);
+gulp.task('default', ['lint', 'webpack', 'bundle:dev', 'copy', 'copycss', 'images']);
