@@ -8,7 +8,7 @@ const app = angular.module('app', ['ngRoute']);
 require('./../services/auth_service')(app);
 require('./../services/error_service')(app);
 
-app.controller('UserController', ['$http', '$location', 'AuthService', 'ErrorService',
+app.controller('UsersController', ['$http', '$location', 'AuthService', 'ErrorService',
 function($http, $location, AuthService, ErrorService) {
   var mainRoute = 'http://localhost:3000/users';
   var vm = this;
