@@ -1,9 +1,5 @@
 'use strict';
 module.exports = function(app) {
-// const angular = require('angular');
-// require('angular-route');
-//
-// const app = angular.module('app', ['ngRoute']);
 
   require('./../services/auth_service')(app);
   require('./../services/error_service')(app);
