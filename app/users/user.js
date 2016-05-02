@@ -3,17 +3,65 @@
 const angular = require('angular');
 require('angular-route');
 
-//are we calling this parks app?
-const app = angular.module('ParksApp', ['ngRoute']);
+const app = angular.module('app', ['ngRoute']);
 
 require('./../services/auth_service')(app);
 require('./../services/error_service')(app);
 
-app.controller('UserController', ['$http', '$location', 'AuthService', 'ErrorService',
+app.controller('UsersController', ['$http', '$location', 'AuthService', 'ErrorService',
 function($http, $location, AuthService, ErrorService) {
   var mainRoute = 'http://localhost:3000/users';
   var vm = this;
+  vm.users = ['users'];
+  vm.error = ErrorService();
 
+  vm.getUsers = function() {
+    $http.get(mainRoute, {
+      headers: {
+        token: AuthService.getToken()
+      }
+    })
+    .then(function (result) {
+      vm.error = ErrorService(null);
+      vm.people = result.data;
+    }, (err) => {
+      vm.error = ErrorService('Please Sign In');
+      console.log(err);
+      $location.path('/signup');
+    });
+  };
+
+  vm.createUser = function(user) {
+    $http.post(mainRoute, user, {
+      headers: {
+        token: AuthService.getToken()
+      }
+    })
+    .then(function(res) {
+      vm.users = vm.users.filter((u) => u._id != user._id);
+    });
+  };
+
+  vm.updateUser = function(user) {
+    $http.put(mainRoute + '/' + user._id, user, {
+      headers: {
+        token: AuthService.getToken()
+      }
+    })
+    .then((res) => {
+      user.editing = false;
+    }, (err) => console.log(err));
+  };
+
+  vm.toggleForm = function(user) {
+    if (!user.editing) {
+      user.backupName = person.name;
+      user.editing = true;
+    } else {
+      user.name = user.backupName;
+      user.editing = false;
+    }
+  };
 
 // Auth Routes
   vm.signUp = function(user) {
