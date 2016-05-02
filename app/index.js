@@ -3,15 +3,12 @@
 let angular = require('angular');
 require('angular-route');
 
-require(__dirname + '/parks/parks.js');
-require(__dirname + '/users/user.js');
-
 let app = angular.module('app',
-  [
-    'ngRoute'
-  ]
- );
+[ 'ngRoute' ]
+);
 
+require(__dirname + '/parks/parks.js')(app);
+require(__dirname + '/users/user.js')(app);
 
 app.config(['$routeProvider', function(router){
   router

@@ -49,15 +49,12 @@
 	let angular = __webpack_require__(1);
 	__webpack_require__(3);
 
-	__webpack_require__(5);
-	__webpack_require__(8);
-
 	let app = angular.module('app',
-	  [
-	    'ngRoute'
-	  ]
-	 );
+	[ 'ngRoute' ]
+	);
 
+	__webpack_require__(5)(app);
+	__webpack_require__(8)(app);
 
 	app.config(['$routeProvider', function(router){
 	  router
@@ -32158,10 +32155,6 @@
 
 	'use strict';
 	module.exports = function(app) {
-	// const angular = require('angular');
-	// require('angular-route');
-	//
-	// const app = angular.module('app', ['ngRoute']);
 
 	  __webpack_require__(6)(app);
 	  __webpack_require__(7)(app);
