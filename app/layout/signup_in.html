@@ -1,0 +1,13 @@
+<section>
+  <h3 data-ng-if="userctrl.error">{{userctrl.error}}</h3>
+  <form data-ng-submit="userctrl.signUp(newUser)">
+    <input type="text" placeholder="email" data-ng-model="newUser.email">
+    <input type="password" placeholder="password" data-ng-model="newUser.password">
+    <button type="submit">Sign Up</button>
+  </form>
+  <form data-ng-submit="userctrl.signIn(user)">
+    <input type="text" placeholder="email" data-ng-model="user.email">
+    <input type="password" placehlder="password" data-ng-model="user.password">
+    <button type="submit">Sign In</button>
+  </form>
+</section>
