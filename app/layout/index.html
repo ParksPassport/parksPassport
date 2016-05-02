@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
     <link rel="stylesheet" href="style/app.css" media="screen" title="no title" charset="utf-8">
   </head>
-  <body>
+  <body ng-app="app">
     <div class="container text-xs-center">
       <h1 class="display-1 m-t-3">Parks Passport</h1>
       <p class="lead m-b-3">Your Passport to our National Parks and Monuments</p>
@@ -21,11 +21,11 @@
 					<a class="btn btn-secondary btn-md" href="#speakers">Sign-up</a>
 			</div>
     </div>
-    
-
-
+    <main ng-view>
+      PROCESSING
+    </main>
     <!-- jQuery first, then Bootstrap JS. -->
     <script></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script> -->
+    <script src="./bundle.js"></script>
   </body>
 </html>
