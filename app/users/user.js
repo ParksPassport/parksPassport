@@ -4,7 +4,7 @@ const angular = require('angular');
 require('angular-route');
 
 //are we calling this parks app?
-const app = angular.module('ParksApp', ['ngRoute']);
+const app = angular.module('app', ['ngRoute']);
 
 require('./../services/auth_service')(app);
 require('./../services/error_service')(app);
@@ -13,6 +13,26 @@ app.controller('UserController', ['$http', '$location', 'AuthService', 'ErrorSer
 function($http, $location, AuthService, ErrorService) {
   var mainRoute = 'http://localhost:3000/users';
   var vm = this;
+  vm.users = ['users']
+  vm.error = ErrorService();
+
+  vm.getUsers = function() {
+    $http.get(mainRoute, {
+      headers: {
+        token: AuthService.getToken()
+      }
+    })
+    .then(function (result) {
+      vm.error = ErrorService(null);
+      vm.people = result.data;
+    }, (err) => {
+      vm.error = ErrorService('Please Sign In');
+      console.log(err);
+      $location.path('/signup');
+    });
+  };
+
+  vm.
 
 
 // Auth Routes
