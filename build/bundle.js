@@ -32021,6 +32021,7 @@
 	      .then(function (result) {
 	        vm.error = ErrorService(null);
 	        vm.parks = result.data;
+	        addMapData(result.data.data);
 	      }, (err) => {
 	        vm.error = ErrorService('Please Sign In');
 	        $location.path('/signup');
@@ -32194,6 +32195,7 @@
 	          token: AuthService.getToken()
 	        }
 	      })
+
 	      .then(function(res) {
 	        vm.users = vm.users.filter((u) => u._id != user._id);
 	      });
@@ -32205,6 +32207,7 @@
 	          token: AuthService.getToken()
 	        }
 	      })
+
 	      .then((res) => {
 	        user.editing = false;
 	      }, (err) => console.log(err));

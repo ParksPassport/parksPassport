@@ -34,6 +34,7 @@ module.exports = function(app) {
           token: AuthService.getToken()
         }
       })
+
       .then(function(res) {
         vm.users = vm.users.filter((u) => u._id != user._id);
       });
@@ -45,6 +46,7 @@ module.exports = function(app) {
           token: AuthService.getToken()
         }
       })
+
       .then((res) => {
         user.editing = false;
       }, (err) => console.log(err));

@@ -45,6 +45,7 @@
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.3",
     "karma-jasmine": "^0.3.8",
+    "leaflet": "^0.7.7",
     "morgan": "^1.7.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.0",
