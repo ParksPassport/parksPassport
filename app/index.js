@@ -13,13 +13,18 @@ require(__dirname + '/users/user.js')(app);
 app.config(['$routeProvider', function(router){
   router
    .when('/signup', {
-     controller: 'UsersController',
-     controllerAs: 'usersctrl',
+    //  controller: 'UsersController',
+    //  controllerAs: 'usersctrl',
      templateUrl: 'signup_in.html'
    })
    .when('/home', {
-     controller: 'ParksController',
-     controllerAs: 'parksctrl',
+    //  controller: 'ParksController',
+    //  controllerAs: 'parksctrl',
      templateUrl:  'home.html'
    });
+  //  .when('/users', {
+  //    controller: 'UsersController',
+  //    controllerAs: 'usersctrl',
+  //    templateUrl: 'home.html'
+  //  });
 }]);

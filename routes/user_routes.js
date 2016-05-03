@@ -13,7 +13,7 @@ module.exports = (router) => {
       if (req.user.admin) {
         User.find({}, (err, users) => {
           if (err) return handleDBError(err, res);
-          res.json({data: users});
+          res.json({users});
         });
       } else {
         return res.json({msg: 'Access denied'});

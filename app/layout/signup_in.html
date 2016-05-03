@@ -1,14 +1,21 @@
-<section>
+<section data-ng-controller="UsersController as usersctrl">
+  <br/>
   <h3 data-ng-if="usersctrl.error">{{usersctrl.error}}</h3>
-  <form data-ng-submit="usersctrl.signUp(newUser)">
-    <input type="text" placeholder="first last" data-ng-model="newUser.fullName">
+
+  <form class="container col-sm-6 col-sm-offset-3 text-sm-center" data-ng-submit="usersctrl.signUp(newUser)">
+    <input class="m-b-5" type="text" placeholder="full name" data-ng-model="newUser.fullName">
     <input type="text" placeholder="email" data-ng-model="newUser.email">
     <input type="password" placeholder="password" data-ng-model="newUser.password">
     <button type="submit">Sign Up</button>
   </form>
-  <form data-ng-submit="usersctrl.signIn(user)">
+
+  <br/>
+  <br/>
+
+  <form class="container col-sm-4 col-sm-offset-4" data-ng-submit="usersctrl.signIn(user)">
     <input type="text" placeholder="email" data-ng-model="user.email">
-    <input type="password" placehlder="password" data-ng-model="user.password">
+    <input type="password" placeholder="password" data-ng-model="user.password">
     <button type="submit">Sign In</button>
   </form>
+
 </section>

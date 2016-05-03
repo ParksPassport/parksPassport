@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 module.exports = function(app) {
 
   require('./../services/auth_service')(app);
@@ -8,8 +8,9 @@ module.exports = function(app) {
   function($http, $location, AuthService, ErrorService) {
     var mainRoute = 'http://localhost:3000/users';
     var vm = this;
-    vm.users = ['users'];
+    vm.users = {};
     vm.error = ErrorService();
+    vm.users = ['user'];
 
     vm.getUsers = function() {
       $http.get(mainRoute, {
@@ -19,7 +20,7 @@ module.exports = function(app) {
       })
       .then(function (result) {
         vm.error = ErrorService(null);
-        vm.people = result.data;
+        vm.users = result.data.users;
       }, (err) => {
         vm.error = ErrorService('Please Sign In');
         console.log(err);
