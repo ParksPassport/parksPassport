@@ -13,7 +13,8 @@ var sources = {
   js:   __dirname + '/app/index.js',
   test: __dirname + '/test/*_spec.js',
   css:  __dirname + '/app/style/*.css',
-  img:  __dirname + '/app/style/images/*.jpg'
+  img:  __dirname + '/app/style/images/*.jpg',
+  geo:  __dirname + '/app/geo/geo.js'
 };
 
 var runCommand = function(command) {
@@ -85,6 +86,11 @@ gulp.task('copycss', function () {
   .pipe(gulp.dest('./build'));
 });
 
+gulp.task('copygeo', function() {
+  return gulp.src(sources.geo)
+  .pipe(gulp.dest('./build'));
+});
+
 gulp.task('images',function() {
   return gulp.src(sources.img)
   .pipe(gulp.dest('./build'));
@@ -96,4 +102,4 @@ gulp.task('bundle:test', () => {
   .pipe(gulp.dest('./test'));
 });
 
-gulp.task('default', ['lint', 'webpack', 'bundle:dev', 'copy', 'copycss', 'images']);
+gulp.task('default', ['lint', 'webpack', 'bundle:dev', 'copy', 'copycss', 'copygeo', 'images']);

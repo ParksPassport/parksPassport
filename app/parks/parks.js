@@ -19,6 +19,7 @@ module.exports = function(app) {
       .then(function (result) {
         vm.error = ErrorService(null);
         vm.parks = result.data;
+        addMapData(result.data.data);
       }, (err) => {
         vm.error = ErrorService('Please Sign In');
         $location.path('/signup');
