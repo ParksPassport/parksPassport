@@ -1,23 +1,21 @@
 <div id="parks" data-ng-controller="ParksController as parksctrl" data-ng-init="parksctrl.getParks()">
+  <br/>
   <h3>Parks Resource Data Array:</h3>
-  <h4 id="beerarray" class="ng-cloak" ng-cloak>{{parksctrl.parks}}</h4>
+  <h6 id="beerarray" class="ng-cloak" ng-cloak>{{parksctrl.parks}}</h6>
 
-</div
-
-
+</div>
 
 
-
-<div id="users" class="tab-content" data-ng-controller="UsersController as usersctrl" data-ng-init="usersctrl.getUsers()">
-  <h3>Our Fabulous Users</h3>
-  <h4 id="userarray" class="ng-cloak" ng-cloak>{{usersctrl.users}}</h4>
+<div id="users" data-ng-controller="UsersController as usersctrl" data-ng-init="usersctrl.getUsers()">
+  <h3>Our Fabulous Users:</h3>
+  <h6 id="userarray" class="ng-cloak" ng-cloak>{{usersctrl.users}}</h6>
   <ul id="userlist">
-    <li class="ng-cloak" data-ng-repeat="user in usersctrl.users" highlight>{{user.fullName}}, favorite parks: {{user.list.item}}
+    <li data-ng-repeat="user in usersctrl.users">{{user.fullName}}, favorite parks: {{user.list.item}}
     <button type="submit" data-ng-click="usersctrl.removeUser(user)">Delete User</button>
     <button type="submit" data-ng-click="usersctrl.toggleForm(user)">Update User</button>
     <form data-ng-if="user.editing" data-ng-submit="usersctrl.updateUser(user)">
       <input type="text" placeholder="full name" data-ng-model="user.fullName">
-      <input type="text" placeholder="your park wish" data-ng-model="user.list.item"/>
+      <input type="text" placeholder="your park wish" data-ng-model="user.list.item">
       <button data-ng-click="usersctrl.toggleForm(user)">Cancel</button>
       <button type="submit">Update</button>
     </form>
