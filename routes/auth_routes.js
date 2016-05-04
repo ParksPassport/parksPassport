@@ -26,8 +26,11 @@ module.exports = (router) => {
           if (err) return handleDBError(err, res);
           res.status(200).json({
             _id: data._id,
-            token: data.generateToken()
+            token: data.generateToken(),
+            name: data.fullName,
+            list: data.list
           });
+          console.log(data.fullName)
         });
       }
     });
@@ -35,6 +38,8 @@ module.exports = (router) => {
   });
 
   router.get('/signin', basicHTTP, (req, res) => {
+    var tempUser;
+
     User.findOne({'authentication.email': req.basicHTTP.email}, (err, user) => {
       if (err) {
         return res.status(401).json({msg: 'Authentication failed'});
@@ -47,8 +52,12 @@ module.exports = (router) => {
       if (!user.comparePassword(req.basicHTTP.password)) {
         return res.status(401).json({msg: 'Go away'});
       }
-      console.log(user);
-      res.json({token: user.generateToken()});
+      console.log(user.fullName);
+      tempUser=user;
+      })
+      .populate('list.item', 'properties')
+      .exec(function(err, data) {
+        res.json({token: tempUser.generateToken(), name: tempUser.fullName, list: data.list});
     });
   });
 

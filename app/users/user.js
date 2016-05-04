@@ -4,10 +4,11 @@ module.exports = function(app) {
   require('./../services/auth_service')(app);
   require('./../services/error_service')(app);
 
-  app.controller('UsersController', ['$http', '$location', 'AuthService', 'ErrorService',
-  function($http, $location, AuthService, ErrorService) {
+  app.controller('UsersController', ['$http', '$location', 'AuthService', 'ErrorService', '$window',
+  function($http, $location, AuthService, ErrorService, $window) {
     var mainRoute = 'http://localhost:3000/users';
     var vm = this;
+    vm.list = [];
     vm.users = {};
     vm.error = ErrorService();
     vm.users = ['user'];
@@ -34,7 +35,6 @@ module.exports = function(app) {
           token: AuthService.getToken()
         }
       })
-
       .then(function(res) {
         vm.users = vm.users.filter((u) => u._id != user._id);
       });
@@ -46,10 +46,20 @@ module.exports = function(app) {
           token: AuthService.getToken()
         }
       })
-
       .then((res) => {
         user.editing = false;
       }, (err) => console.log(err));
+    };
+
+    vm.getList = function(user) {
+      $http.get(mainRoute + '/' + user._id + '/list', {
+        headers: {
+          token: AuthService.getToken()
+        }
+      })
+      .then((res) => {
+        vm.list = res.data.list;
+      });
     };
 
     vm.toggleForm = function(user) {
@@ -78,12 +88,18 @@ module.exports = function(app) {
     };
 
     vm.signIn = function(user) {
-      AuthService.signIn(user, (err) => {
+      AuthService.signIn(user, (err, res) => {
         if (err) return vm.error = ErrorService('Problem Signing In');
         vm.error = ErrorService(null);
         $location.path('/home');
       });
     };
+
+    vm.currentUser = function() {
+      vm.name = $window.localStorage.name;
+      vm.list = JSON.parse($window.localStorage.list);
+      console.log(vm.list)
+    }
 
   }]);
 };

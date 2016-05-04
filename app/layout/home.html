@@ -81,7 +81,17 @@
 </div>
 
 
-<!-- <div id="users" data-ng-controller="UsersController as usersctrl" data-ng-init="usersctrl.signIn()"> -->
+<div data-ng-controller="UsersController as usersctrl" ng-init="usersctrl.currentUser()">
+  <h6>Welcome {{usersctrl.name}}</h6>
+
+  <ul>
+    <li ng-repeat="park in usersctrl.list track by $index">{{park.item.properties.UNIT_NAME}}</li>
+  </ul>
+
+  <!-- <h6 ng-init="usersctrl.getList()">Your list of parks: {{usersctrl.list.item}}</h6> -->
+  <ul>
+</ul>
+
   <!-- <h3>Our Fabulous Users:</h3>
   <h6 id="userarray" class="ng-cloak" ng-cloak>{{usersctrl.user}}</h6> -->
   <!-- <ul id="userlist">
