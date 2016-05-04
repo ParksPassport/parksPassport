@@ -9,16 +9,16 @@ module.exports = (router) => {
 
   router.post('/signup', parser, (req, res) => {
     User.findOne({'authentication.email': req.body.email}, (err, user) => {
-      if (err) return handleDBError(err, res); 
+      if (err) return handleDBError(err, res);
       if (user) {
-        return res.status(400).json({msg: 'That account already exists'});  
+        return res.status(400).json({msg: 'That account already exists'});
       } else {
         var newUser = new User();
         if (!((req.body.email || '').length
             && (req.body.password || '').length > 7)) {
           return res.status(400).json({msg: 'Invalid username or password'});
-        } 
-      
+        }
+
         newUser.fullName = req.body.fullName || req.body.email;
         newUser.authentication.email = req.body.email;
         newUser.hashPassword(req.body.password);
@@ -39,7 +39,7 @@ module.exports = (router) => {
       if (err) {
         return res.status(401).json({msg: 'Authentication failed'});
       }
-      
+
       if (!user) {
         return res.status(401).json({msg: 'User not found'});
       }
@@ -47,10 +47,9 @@ module.exports = (router) => {
       if (!user.comparePassword(req.basicHTTP.password)) {
         return res.status(401).json({msg: 'Go away'});
       }
-
-      res.json({token: user.generateToken()});      
+      console.log(user);
+      res.json({token: user.generateToken()});
     });
-  }); 
-    
-};
+  });
 
+};

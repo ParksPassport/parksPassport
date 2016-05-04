@@ -32071,8 +32071,9 @@
 	    };
 
 
-	    vm.parksByState = function(parks) {
-	      $http.get('http://localhost:3000/state', parks, {
+	    vm.parksByState = function(state) {
+	      console.log(state);
+	      $http.get('http://localhost:3000/state/?state=\"' + state + '\"', {
 	        headers: {
 	          token: AuthService.getToken()
 	        }
@@ -32080,6 +32081,7 @@
 	      .then (function (result) {
 	        vm.error = ErrorService(null);
 	        vm.parks = result.data;
+	        console.log(result.data);
 	      }, (err) => {
 	        vm.error = ErrorService('Please Sign In');
 	        $location.path('/signup');
