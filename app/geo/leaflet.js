@@ -12,5 +12,5 @@ function addMapData(mapDataArr) {
     var marker = L.marker([park.geometry.coordinates[1],park.geometry.coordinates[0]])
     .bindPopup(park.properties.UNIT_NAME)
     .addTo(mymap);
-  })
+  });
 }
