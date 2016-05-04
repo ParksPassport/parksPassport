@@ -69,6 +69,7 @@ module.exports = (router) => {
         .populate('list.item', 'properties')
         .exec((err, user) => {
           if (err) return handleDBError(err, res);
+          console.log(user.list)
           res.json(user.list);
         });
       } else {

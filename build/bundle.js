@@ -32099,6 +32099,8 @@
 	module.exports = function(app) {
 	  app.factory('AuthService', ['$http', '$window', function($http, $window) {
 	    var token;
+	    var name;
+	    var list;
 	    var url = 'http://localhost:3000';
 	    var auth = {
 	      createUser(user, cb) {
@@ -32106,6 +32108,8 @@
 	        $http.post(url + '/signup', user)
 	        .then((res) => {
 	          token = $window.localStorage.token = res.data.token;
+	          $window.localStorage.name = res.data.name;
+	          $window.localStorage.list = res.data.list;
 	          cb(null, res);
 	        }, (err) => {
 	          cb(err);
@@ -32119,6 +32123,8 @@
 	      signOut(cb) {
 	        token = null;
 	        $window.localStorage.token = null;
+	        $window.localStorage.name = null;
+	        $window.localStorage.list = null;
 	        if (cb) cb();
 	      },
 
@@ -32129,7 +32135,10 @@
 	            authorization: 'Basic ' + btoa(user.email + ':' + user.password)
 	          }
 	        }).then((res) => {
+	          // console.log(res.data.list);
 	          token = $window.localStorage.token = res.data.token;
+	          $window.localStorage.name = res.data.name;
+	          $window.localStorage.list = JSON.stringify(res.data.list);
 	          cb(null, res);
 	        }, (err) => {
 	          cb(err);
@@ -32167,10 +32176,11 @@
 	  __webpack_require__(6)(app);
 	  __webpack_require__(7)(app);
 
-	  app.controller('UsersController', ['$http', '$location', 'AuthService', 'ErrorService',
-	  function($http, $location, AuthService, ErrorService) {
+	  app.controller('UsersController', ['$http', '$location', 'AuthService', 'ErrorService', '$window',
+	  function($http, $location, AuthService, ErrorService, $window) {
 	    var mainRoute = 'http://localhost:3000/users';
 	    var vm = this;
+	    vm.list = [];
 	    vm.users = {};
 	    vm.error = ErrorService();
 	    vm.users = ['user'];
@@ -32197,7 +32207,6 @@
 	          token: AuthService.getToken()
 	        }
 	      })
-
 	      .then(function(res) {
 	        vm.users = vm.users.filter((u) => u._id != user._id);
 	      });
@@ -32209,10 +32218,20 @@
 	          token: AuthService.getToken()
 	        }
 	      })
-
 	      .then((res) => {
 	        user.editing = false;
 	      }, (err) => console.log(err));
+	    };
+
+	    vm.getList = function(user) {
+	      $http.get(mainRoute + '/' + user._id + '/list', {
+	        headers: {
+	          token: AuthService.getToken()
+	        }
+	      })
+	      .then((res) => {
+	        vm.list = res.data.list;
+	      });
 	    };
 
 	    vm.toggleForm = function(user) {
@@ -32241,12 +32260,18 @@
 	    };
 
 	    vm.signIn = function(user) {
-	      AuthService.signIn(user, (err) => {
+	      AuthService.signIn(user, (err, res) => {
 	        if (err) return vm.error = ErrorService('Problem Signing In');
 	        vm.error = ErrorService(null);
 	        $location.path('/home');
 	      });
 	    };
+
+	    vm.currentUser = function() {
+	      vm.name = $window.localStorage.name;
+	      vm.list = JSON.parse($window.localStorage.list);
+	      console.log(vm.list)
+	    }
 
 	  }]);
 	};
