@@ -34,6 +34,7 @@ module.exports = (router) => {
       console.log('parkName: ', parkName);
       Parks.find({'properties.UNIT_NAME': parkName}, (err, parks)=> {
         res.json(parks);
+
       });
     });
 
@@ -43,6 +44,7 @@ module.exports = (router) => {
       var stateParks = JSON.parse(req.query.state);
       console.log('parkName: ', stateParks);
       Parks.find({'properties.STATE': stateParks}, (err, parks)=> {
+        console.log(parks);
         res.json(parks);
       });
     });

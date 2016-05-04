@@ -1,6 +1,6 @@
 <section data-ng-controller="UsersController as usersctrl">
   <br/>
-  <h3 data-ng-if="usersctrl.error">{{usersctrl.error}}</h3>
+  <h3 class="container" data-ng-if="usersctrl.error">{{usersctrl.error}}</h3>
 
   <form class="container col-sm-6 col-sm-offset-3 text-sm-center" data-ng-submit="usersctrl.signUp(newUser)">
     <input class="m-b-5" type="text" placeholder="full name" data-ng-model="newUser.fullName">
