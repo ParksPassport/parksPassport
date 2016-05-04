@@ -1,4 +1,4 @@
-<div id="parks" class="container" data-ng-controller="ParksController as parksctrl">
+<div id="parks" class="container" data-ng-init="parksctrl.getParks()" data-ng-controller="ParksController as parksctrl">
   <form name="stateForm">
     <label for="stateSelect">Select State: </label><br>
     <select name="stateSelect" ng-model="state" ng-change="parksctrl.parksByState(state)" class="c-select">
@@ -81,7 +81,7 @@
 </div>
 
 
-<div id="users" data-ng-controller="UsersController as usersctrl" data-ng-init="usersctrl.signIn()">
+<!-- <div id="users" data-ng-controller="UsersController as usersctrl" data-ng-init="usersctrl.signIn()"> -->
   <!-- <h3>Our Fabulous Users:</h3>
   <h6 id="userarray" class="ng-cloak" ng-cloak>{{usersctrl.user}}</h6> -->
   <!-- <ul id="userlist">

@@ -14,7 +14,7 @@ var sources = {
   test: __dirname + '/test/*_spec.js',
   css:  __dirname + '/app/style/*.css',
   img:  __dirname + '/app/style/images/*.jpg',
-  geo:  __dirname + '/app/geo/geo.js'
+  geo:  __dirname + '/app/geo/*.js'
 };
 
 var runCommand = function(command) {

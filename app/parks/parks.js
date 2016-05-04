@@ -19,6 +19,8 @@ module.exports = function(app) {
       .then(function (result) {
         vm.error = ErrorService(null);
         vm.parks = result.data;
+        console.log(result.data)
+        // console.log('inside parks controller')
         addMapData(result.data.data);
       }, (err) => {
         vm.error = ErrorService('Please Sign In');
