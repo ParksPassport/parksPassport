@@ -40,24 +40,21 @@ module.exports = (router) => {
   router.get('/signin', basicHTTP, (req, res) => {
     var tempUser;
 
-    User.findOne({'authentication.email': req.basicHTTP.email}, (err, user) => {
-      if (err) {
-        return res.status(401).json({msg: 'Authentication failed'});
-      }
-
-      if (!user) {
-        return res.status(401).json({msg: 'User not found'});
-      }
-
-      if (!user.comparePassword(req.basicHTTP.password)) {
-        return res.status(401).json({msg: 'Go away'});
-      }
-      console.log(user.fullName);
-      tempUser = user;
-      })
+    User.findOne({'authentication.email': req.basicHTTP.email})
       .populate('list.item', 'properties')
-      .exec(function(err, data) {
-        res.json({token: tempUser.generateToken(), name: tempUser.fullName, list: data.list});
+      .exec(function(err, user) {
+        if (err) {
+          return res.status(401).json({msg: 'Authentication failed'});
+        }
+
+        if (!user) {
+          return res.status(401).json({msg: 'User not found'});
+        }
+
+        if (!user.comparePassword(req.basicHTTP.password)) {
+          return res.status(401).json({msg: 'Go away'});
+        }
+        res.json({token: user.generateToken(), name: user.fullName, list: user.list});
     });
   });
 

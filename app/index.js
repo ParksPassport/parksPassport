@@ -2,9 +2,12 @@
 
 let angular = require('angular');
 require('angular-route');
+require('angular-animate');
+require('angular-touch');
+require('angular-ui-bootstrap');
 
 let app = angular.module('app',
-[ 'ngRoute' ]
+[ 'ngRoute' , 'ui.bootstrap' ]
 );
 
 require(__dirname + '/parks/parks.js')(app);

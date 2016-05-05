@@ -4,8 +4,8 @@ module.exports = function(app) {
   require('./../services/auth_service')(app);
   require('./../services/error_service')(app);
 
-  app.controller('UsersController', ['$http', '$location', 'AuthService', 'ErrorService', '$window',
-  function($http, $location, AuthService, ErrorService, $window) {
+  app.controller('UsersController', ['$http', '$location', 'AuthService', 'ErrorService', '$window', '$uibModal', '$scope',
+  function($http, $location, AuthService, ErrorService, $window, $uibModal, $scope) {
     var mainRoute = 'http://localhost:3000/users';
     var vm = this;
     vm.list = [];
@@ -87,14 +87,6 @@ module.exports = function(app) {
       });
     };
 
-    vm.signIn = function(user) {
-      AuthService.signIn(user, (err, res) => {
-        if (err) return vm.error = ErrorService('Problem Signing In');
-        vm.error = ErrorService(null);
-        $location.path('/home');
-      });
-    };
-
     vm.currentUser = function() {
       vm.name = $window.localStorage.name;
       vm.list = JSON.parse($window.localStorage.list);
@@ -117,6 +109,23 @@ module.exports = function(app) {
 
 
     }
+    vm.openSignIn = function() {
+      vm.error = ErrorService(null);
+      var options = {
+        templateUrl: 'myModalContent.html'
+      };
+      $uibModal.open(options).result.then(function(user) {
+        AuthService.signIn(user, (err, res) => {
+          if (err) {
+            // vm.openSignIn();
+            return vm.error = ErrorService('Problem Signing In');
+          }
+
+          vm.error = ErrorService(null);
+          $location.path('/home');
+        });
+      });
+    };
 
   }]);
 };

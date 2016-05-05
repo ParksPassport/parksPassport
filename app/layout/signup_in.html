@@ -5,7 +5,29 @@
   </div>
 </div> -->
 
-<section data-ng-controller="UsersController as usersctrl">
+<div ng-controller="UsersController as usersctrl">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3>I'm a modal!</h3>
+        </div>
+        <div  class="modal-body">
+          <form class="container col-sm-4 col-sm-offset-4">
+            <input type="text" placeholder="email" data-ng-model="user.email">
+            <input type="password" placeholder="password" data-ng-model="user.password">
+            <!-- <button type="submit" ng-click="$close()">Sign In</button> -->
+          </form>
+        </div>
+        <div class="modal-footer">
+
+            <button class="btn btn-primary" ng-click="$close(user)">Sign In</button>
+            <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
+        </div>
+    </script>
+
+    <button class="btn" ng-click="usersctrl.openSignIn()">Open me!</button>{{usersctrl.error}}
+</div>
+
+<!-- <section data-ng-controller="UsersController as usersctrl">
   <br/>
   <h3 class="container" data-ng-if="usersctrl.error">{{usersctrl.error}}</h3>
 
@@ -19,10 +41,4 @@
   <br/>
   <br/>
 
-  <form class="container col-sm-4 col-sm-offset-4" data-ng-submit="usersctrl.signIn(user)">
-    <input type="text" placeholder="email" data-ng-model="user.email">
-    <input type="password" placeholder="password" data-ng-model="user.password">
-    <button type="submit">Sign In</button>
-  </form>
-
-</section>
+</section> -->
