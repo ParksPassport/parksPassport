@@ -13,6 +13,7 @@ var sources = {
   js:   __dirname + '/app/index.js',
   test: __dirname + '/test/*_spec.js',
   css:  __dirname + '/app/style/*.css',
+  font: __dirname + '/app/style/fonts/**/*',
   img:  __dirname + '/app/style/images/*.jpg',
   geo:  __dirname + '/app/geo/*.js'
 };
@@ -96,10 +97,15 @@ gulp.task('images',function() {
   .pipe(gulp.dest('./build'));
 });
 
+gulp.task('copyfonts', function() {
+  return gulp.src(sources.font)
+  .pipe(gulp.dest('./build/fonts'));
+});
+
 gulp.task('bundle:test', () => {
   return gulp.src(sources.test)
   .pipe(webpack({output: {filename:'test_bundle.js'}}))
   .pipe(gulp.dest('./test'));
 });
 
-gulp.task('default', ['lint', 'webpack', 'bundle:dev', 'copy', 'copycss', 'copygeo', 'images']);
+gulp.task('default', ['lint', 'webpack', 'bundle:dev', 'copy', 'copycss', 'copygeo', 'images', 'copyfonts']);

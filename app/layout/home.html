@@ -1,3 +1,25 @@
+<div class="container" data-ng-controller="UsersController as usersctrl" ng-init="usersctrl.currentUser()">
+  <h4>Welcome, {{usersctrl.name}}!</h4><br>
+    <button class="" ng-click="usersctrl.signOut()">Sign Out</button>
+    <br>
+  <table class="table-responsive table">
+  <thead>
+    <th>State</th>
+    <th>Name of Parks</th>
+    <th>Type of Park</th>
+    <th>Visited?</th>
+  </thead>
+      <tbody class="table-hover">
+        <tr data-ng-repeat="park in usersctrl.list track by $index">
+          <td>{{park.item.properties.STATE}}</td>
+          <td>{{park.item.properties.UNIT_NAME}}</td>
+          <td>{{park.item.properties.UNIT_TYPE}}</td>
+          <td class="text-xs-center" data-ng-if="park.completed"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+          <td class="text-xs-center" data-ng-if="!park.completed"><label class="c-input c-checkbox"><input type="checkbox"><span class="c-indicator"></span></label></td>
+        </tr>
+      </tbody>
+    </table>
+
 <div id="parks" class="container" data-ng-init="parksctrl.getParks()" data-ng-controller="ParksController as parksctrl">
   <form name="stateForm">
     <label for="stateSelect">Select State: </label><br>
@@ -55,11 +77,8 @@
       <option value="WY">Wyoming</option>
     </select>
     <tt>State selected: {{state}}</tt>
-
   </form>
-    <!-- <ul>
-      <li data-ng-repeat="park in parksctrl.parks">{{park.properties.UNIT_NAME}}</li>
-    </ul> -->
+
 <table class="table-responsive table">
 <thead>
   <th>State</th>
@@ -72,39 +91,11 @@
         <td>{{park.properties.STATE}}</td>
         <td>{{park.properties.UNIT_NAME}}</td>
         <td>{{park.properties.UNIT_TYPE}}</td>
-        <td><button type="submit" name="button">Add Park</button></td>
+        <td><button ng-click="usersctrl.addPark(park)">Add Park</button></td>
       </tr>
     </tbody>
   </table>
   </div>
 
 </div>
-
-
-<div data-ng-controller="UsersController as usersctrl" ng-init="usersctrl.currentUser()">
-  <h6>Welcome {{usersctrl.name}}</h6>
-
-  <ul>
-    <li ng-repeat="park in usersctrl.list track by $index">{{park.item.properties.UNIT_NAME}}</li>
-  </ul>
-
-  <!-- <h6 ng-init="usersctrl.getList()">Your list of parks: {{usersctrl.list.item}}</h6> -->
-  <ul>
-</ul>
-
-  <!-- <h3>Our Fabulous Users:</h3>
-  <h6 id="userarray" class="ng-cloak" ng-cloak>{{usersctrl.user}}</h6> -->
-  <!-- <ul id="userlist">
-    <li data-ng-repeat="user in usersctrl.users">{{user.fullName}}, favorite parks: {{user.list.item}}
-    <button type="submit" data-ng-click="usersctrl.removeUser(user)">Delete User</button>
-    <button type="submit" data-ng-click="usersctrl.toggleForm(user)">Update User</button>
-    <form data-ng-if="user.editing" data-ng-submit="usersctrl.updateUser(user)">
-      <input type="text" placeholder="full name" data-ng-model="user.fullName">
-      <input type="text" placeholder="your park wish" data-ng-model="user.list.item">
-      <button data-ng-click="usersctrl.toggleForm(user)">Cancel</button>
-      <button type="submit">Update</button>
-    </form>
-    </li>
-  </ul> -->
-  <button ng-click="usersctrl.signOut()">Sign Out</button>
 </div>
