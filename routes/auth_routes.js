@@ -38,7 +38,6 @@ module.exports = (router) => {
   });
 
   router.get('/signin', basicHTTP, (req, res) => {
-    var tempUser;
 
     User.findOne({'authentication.email': req.basicHTTP.email})
       .populate('list.item', 'properties')
@@ -55,7 +54,7 @@ module.exports = (router) => {
           return res.status(401).json({msg: 'Go away'});
         }
         res.json({token: user.generateToken(), name: user.fullName, list: user.list});
-    });
+      });
   });
 
 };
