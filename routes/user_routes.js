@@ -70,14 +70,13 @@ module.exports = (router) => {
         .populate('list.item', 'properties')
         .exec((err, user) => {
           if (err) return handleDBError(err, res);
-          console.log(user.list)
           res.json(user.list);
         });
       } else {
         return res.json({msg: 'Access denied'});
       }
     });
-    router.route('/addpark/:park')
+  router.route('/addpark/:park')
       .put(jwtAuth, (req, res) => {
         var updatedUser = req.user;
         updatedUser.list.push({
@@ -89,5 +88,5 @@ module.exports = (router) => {
           if (err) return handleDBError(err, res);
           res.json({msg: 'success'});
         });
-      })
+      });
 };
