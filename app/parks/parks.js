@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 module.exports = function(app) {
 
   require('./../services/auth_service.js')(app);
@@ -19,9 +21,16 @@ module.exports = function(app) {
       .then(function (result) {
         vm.error = ErrorService(null);
         vm.parks = result.data;
-        console.log(result.data)
+        // console.log(result.data);
+        console.log(typeof loadMap);
+        loadMap.then(function() {
+          console.log('promise resolved');
+          addMapData(result.data.data);
+        })
+        .catch(function() {
+          vm.error = ErrorService('Please enable location services to display map');
+        });
         // console.log('inside parks controller')
-        addMapData(result.data.data);
       }, (err) => {
         vm.error = ErrorService('Please Sign In');
         $location.path('/signup');
