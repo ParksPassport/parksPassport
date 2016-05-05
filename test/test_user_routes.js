@@ -75,7 +75,7 @@ describe('Integration Tests (User Routes)', () => {
       .send({
         'geometry': {
           'coordinates':[-122.6992830597305, 48.206276500082225],
-          'type' : 'Point' 
+          'type' : 'Point'
         },
         'properties': {
           'UNIT_TYPE':'National Historical Reserve',
@@ -134,7 +134,7 @@ describe('Integration Tests (User Routes)', () => {
           'UNIT_CODE':'SAJH',
           'UNIT_NAME':'San Juan Island',
           'PARKNAME':'San Juan Island'
-        } 
+        }
       })
       .end((err, res) => {
         if (err) return console.log(err);
@@ -223,13 +223,13 @@ describe('Integration Tests (User Routes)', () => {
       .put('/users/' + adminID)
       .set('token', adminToken)
       .send({
-        list: [ 
+        list: [
           {'item': park1ID},
           {'item': park2ID},
           {'item': park3ID},
           {'item': park4ID},
           {'item': park5ID}
-        ] 
+        ]
       })
       .end((err) => {
         if (err) return console.log(err);
@@ -264,7 +264,7 @@ describe('Integration Tests (User Routes)', () => {
         .end((err, res) => {
           expect(err).to.eql(null);
           expect(typeof res.body).to.eql('object');
-          expect(Array.isArray(res.body.data)).to.eql(true);
+          expect(Array.isArray(res.body.data)).to.eql(false);
           done();
         });
     });
@@ -283,7 +283,7 @@ describe('Integration Tests (User Routes)', () => {
 
     it('should allow a user to view her own list', (done) => {
       request('localhost:3000')
-        .get('/users/' + adminID + '/list') 
+        .get('/users/' + adminID + '/list')
         .set('token', adminToken)
         .end((err, res) => {
           expect(err).to.eql(null);
