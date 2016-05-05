@@ -73,13 +73,13 @@ module.exports = function(app) {
     };
 
   // Auth Routes
-    vm.signUp = function(user) {
-      AuthService.createUser(user, function(err) {
-        if (err) return vm.error = ErrorService('There was a problem creating a user');
-        vm.error = ErrorService(null);
-        $location.path('/home');
-      });
-    };
+    // vm.signUp = function(user) {
+    //   AuthService.createUser(user, function(err) {
+    //     if (err) return vm.error = ErrorService('There was a problem creating a user');
+    //     vm.error = ErrorService(null);
+    //     $location.path('/home');
+    //   });
+    // };
 
     vm.signOut = function() {
       AuthService.signOut(() => {
@@ -89,9 +89,11 @@ module.exports = function(app) {
 
     vm.currentUser = function() {
       vm.name = $window.localStorage.name;
-      vm.list = JSON.parse($window.localStorage.list);
-      console.log(vm.list)
-    }
+      if ($window.localStorage.list.length) {
+        vm.list = JSON.parse($window.localStorage.list);
+        console.log(vm.list);
+      }
+    };
 
     vm.addPark = function(park) {
       $http.put('http://localhost:3000/addpark/' + park._id, {}, {
@@ -120,7 +122,21 @@ module.exports = function(app) {
             // vm.openSignIn();
             return vm.error = ErrorService('Problem Signing In');
           }
-
+          vm.error = ErrorService(null);
+          $location.path('/home');
+        });
+      });
+    };
+    vm.openSignUp = function() {
+      vm.error = ErrorService(null);
+      var options = {
+        templateUrl: 'myModalContent2.html'
+      };
+      $uibModal.open(options).result.then(function(user) {
+        AuthService.createUser(user, function(err) {
+          if (err) {
+            return vm.error = ErrorService('There was a problem creating a user');
+          }
           vm.error = ErrorService(null);
           $location.path('/home');
         });
