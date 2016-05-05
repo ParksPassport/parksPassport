@@ -47,6 +47,7 @@ module.exports = (router) => {
       }
     })
 
+
     .delete(jwtAuth, (req, res) => {
       if (req.user.admin) {
         User.findById(req.params.user, (err, user) => {
@@ -76,4 +77,17 @@ module.exports = (router) => {
         return res.json({msg: 'Access denied'});
       }
     });
+    router.route('/addpark/:park')
+      .put(jwtAuth, (req, res) => {
+        var updatedUser = req.user;
+        updatedUser.list.push({
+          item: req.params.park,
+          completed: false
+        });
+
+        User.findByIdAndUpdate(updatedUser._id, updatedUser, (err) => {
+          if (err) return handleDBError(err, res);
+          res.json({msg: 'success'});
+        });
+      })
 };
