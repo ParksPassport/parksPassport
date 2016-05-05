@@ -101,5 +101,22 @@ module.exports = function(app) {
       console.log(vm.list)
     }
 
+    vm.addPark = function(park) {
+      $http.put('http://localhost:3000/addpark/' + park._id, {}, {
+        headers: {
+          token: AuthService.getToken()
+        }
+      })
+      .then(() => {
+        vm.list.push({item: park, completed: false});
+        console.log('added park', vm.list);
+        $window.localStorage.list = JSON.stringify(vm.list);
+      }, (err) => {
+        console.log(err);
+      });
+
+
+    }
+
   }]);
 };

@@ -53,7 +53,7 @@ module.exports = (router) => {
         return res.status(401).json({msg: 'Go away'});
       }
       console.log(user.fullName);
-      tempUser=user;
+      tempUser = user;
       })
       .populate('list.item', 'properties')
       .exec(function(err, data) {
