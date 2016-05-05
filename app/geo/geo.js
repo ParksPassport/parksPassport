@@ -1,30 +1,33 @@
-// mapboxgl.accessToken = 'pk.eyJ1IjoicGFya3NhcHAiLCJhIjoiY2lubTlubWw1MHpyN3U4a2pmcDgydXZ1byJ9.fLLOyWgTQ7gMfdCXtEmUAQ';
-//
-// function addMapData(mapDataArr) {
-//   console.log('this is dumb')
-//   var map = new mapboxgl.Map({
-//     container: 'mapid',
-//     style: 'mapbox://styles/mapbox/dark-v8',
-//     // style: 'mapbox://styles/mapbox/emerald-v8',
-//     center: [-103.59179687498357, 40.66995747013945],
-//     zoom: 3
-//   });
-//   map.on('load', function(){
-//     map.addSource('earthquakes', {
-//       type: 'geojson',
-//       data: {
-//         'type': 'FeatureCollection',
-//         'crs': { 'type': 'name', 'properties': { 'name': 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
-//         'features': mapDataArr
-//       }
-//     });
-//     map.addLayer({
-//       'id': 'non-cluster-markers',
-//       'type': 'symbol',
-//       'source': 'earthquakes',
-//       'layout': {
-//         'icon-image': 'marker-15'
-//       }
-//     });
-//   });
-// }
+module.exports = function(app) {
+
+  require('./../services/auth_service.js')(app);
+  require('./../services/error_service')(app);
+
+  app.controller('GeoLocController', ['AuthService','$http', '$location', 'ErrorService', function(AuthService, $http, $location, ErrorService) {
+    const mainRoute = 'http://localhost:3000/geolocation';
+    const vm = this;
+    vm.parks = [];
+    vm.error = ErrorService();
+
+    vm.closeParks = ['closeParks'];
+    vm.getCloseParks = function() {
+      $http.get(mainRoute, {
+        headers: {
+          token: AuthService.getToken()
+        }
+      })
+      .then(function (result) {
+        vm.error = ErrorService(null);
+        vm.parks = result.data;
+        console.log('result in geolocation', result.data);
+        addGeoMapData(result.data.data);
+      }, (err) => {
+        vm.error = ErrorService('Please Sign In');
+        $location.path('/signup')
+        console.log(err);
+      });
+    };
+
+  });
+
+};
