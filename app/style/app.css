@@ -3,8 +3,29 @@
   background-size: cover;
   background-repeat: no-repeat;
   /*padding-top: 20%;*/
-  padding-bottom: 30%;
+  padding-bottom: 40%;
+}
 
+.nav {
+  background-image: url("./lakeunsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 1%
+  padding-bottom: 1%;
+}
+/*.homelist {
+  background-color: #beccd1;
+}*/
+#homepage {
+  background-color: #808080;
+}
+
+#list {
+  overflow:scroll;
+  height: 430px;
+}
+.btn-group {
+  align-items: center;
 }
 
 form {

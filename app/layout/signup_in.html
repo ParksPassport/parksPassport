@@ -1,22 +1,22 @@
-<!-- <div class="container col-lg-4 col-lg-offset-4 text-xs-center p-b-2">
-  <div class="btn-group m-t-2 m-b-5" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#register">View my wish list</button>
-      <a class="btn btn-secondary btn-md" href="#speakers">Sign-up</a>
-  </div>
-</div> -->
 
-<div ng-controller="UsersController as usersctrl">
+
+<div class="jumbotron container-fluid" ng-controller="UsersController as usersctrl">
+  <div>
+    <div class="container-fluid text-xs-center">
+      <h1 class="display-1 m-t-2">Parks Passport</h1>
+      <p class="lead m-b-2">Your Passport to our National Parks and Monuments</p>
+    </div>
     <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3>Please sign in</h3>
-        </div>
-        <div  class="modal-body">
-          <form class="container col-sm-4 col-sm-offset-4">
-            <input type="text" placeholder="email" data-ng-model="user.email">
-            <input type="password" placeholder="password" data-ng-model="user.password">
-          </form>
-        </div>
-        <div class="modal-footer">
+      <div class="modal-header">
+        <h3>Welcome back | Please sign in</h3>
+      </div>
+      <div  class="modal-body">
+        <form class="form-inline">
+          <input type="text" placeholder="email" data-ng-model="user.email">
+          <input type="password" placeholder="password" data-ng-model="user.password">
+        </form>
+      </div>
+      <div class="modal-footer">
 
             <button class="btn btn-primary" ng-click="$close(user)">Sign In</button>
             <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
@@ -24,12 +24,12 @@
     </script>
     <script type="text/ng-template" id="myModalContent2.html">
         <div class="modal-header">
-            <h3>Welcome. Please register</h3>
+            <h3>Welcome | Please register</h3>
         </div>
         <div  class="modal-body">
 
-            <form class="container col-sm-6 col-sm-offset-3 text-sm-center">
-              <input class="m-b-5" type="text" placeholder="full name" data-ng-model="user.fullName">
+            <form class="form-inline">
+              <input type="text" placeholder="full name" data-ng-model="user.fullName">
               <input type="text" placeholder="email" data-ng-model="user.email">
               <input type="password" placeholder="password" data-ng-model="user.password">
           </form>
@@ -40,26 +40,10 @@
             <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
         </div>
     </script>
-    <div class="btn-group m-t-2 m-b-5" role="group">
+    <div class="m-t-2 m-b-5 col-lg-4 col-lg-offset-4 text-sm-center" role="group">
         <button type="button" class="btn btn-info btn-md" ng-click="usersctrl.openSignIn()">View my wish list</button>
         <a class="btn btn-secondary btn-md" ng-click="usersctrl.openSignUp()">Register</a>
     </div>
-    <!-- <button class="btn" ng-click="usersctrl.openSignIn()">Sign In</button>{{usersctrl.error}}
-    <button class="btn" ng-click="usersctrl.openSignUp()">Register</button> -->
+
+  </div>
 </div>
-
-<!-- <section data-ng-controller="UsersController as usersctrl">
-  <br/>
-  <h3 class="container" data-ng-if="usersctrl.error">{{usersctrl.error}}</h3>
-
-  <form class="container col-sm-6 col-sm-offset-3 text-sm-center" data-ng-submit="usersctrl.signUp(newUser)">
-    <input class="m-b-5" type="text" placeholder="full name" data-ng-model="newUser.fullName">
-    <input type="text" placeholder="email" data-ng-model="newUser.email">
-    <input type="password" placeholder="password" data-ng-model="newUser.password">
-    <button type="submit">Sign Up</button>
-  </form>
-
-  <br/>
-  <br/>
-
-</section> -->
