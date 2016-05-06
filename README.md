@@ -1,15 +1,48 @@
-# VisitYourParks  
-***National Parks 'Bucket' List***
+# Parks Passport  
+***Your Passport to our National Parks and Monuments***
 
-This API leverages geolocation data from the National Parks service to
-provide users with the ability to discover when they are near features
-or parks they may be interested in.  
+This application leverages park data from the National Parks service to provide users with the ability to create a wish list of parks they would like to visit, and be notified when they are near features that appear on their wish list.
 
-A user creates a new account and adds parks or landmarks to their "List".
-Then, whenever they log in, the API will tell them which parks or landmarks
-are currently within 200 miles of their location.
+A user creates a new account and adds parks or landmarks to their list using the dropdown menu to search by state. Then, when the user logs in, the application uses geolocation data to determine which parks or landmarks are currently within 200 miles of their location.
 
-## Routes
+## Application Dependencies
+
+### Dependencies  
+
+* bcrypt  
+* body-parser  
+* express  
+* jsonwebtoken  
+* mongoose  
+
+### Dev Dependencies  
+
+* angular  
+* angular-animate
+* angular-mocks
+* angular-route
+* angular-touch
+* angular-ui-bootstrap
+* chai
+* chai-http
+* css-loader
+* gulp-cli
+* gulp-eslint  
+* gulp-karma  
+* gulp-mocha  
+* jasmine  
+* jasmine-core  
+* karma  
+* karma-chrome-launcher  
+* karma-jasmine  
+* leaflet  
+* morgan  
+* style-loader
+* webpack
+* webpack-stream  
+
+
+## Backend API Routes
 
 ### Authentication Routes (auth_routes.js)
 
@@ -125,5 +158,5 @@ are currently within 200 miles of their location.
 ## Authors
 
 [Samantha Prince] (https://github.com/samanthaprince)  
-[Kevin Sulonen] (https://github.com/sulonen)  
 [Mikleane Chouinard] (https://github.com/mikleane)  
+[Kevin Sulonen] (https://github.com/sulonen) (Backend Collaborator)

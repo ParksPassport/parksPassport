@@ -21,26 +21,12 @@
     <link rel="stylesheet" href="./app.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body ng-app="app">
-    <div class="jumbotron">
-    <div class="container-fluid text-xs-center">
-      <h1 class="display-1 m-t-2">Parks Passport</h1>
-      <p class="lead m-b-2">Your Passport to our National Parks and Monuments</p>
-    </div>
-  </div>
-
-    <br/>
-      <!-- map div and button -->
-      <div id='mapid' style='width: 50%; height: 500px;'></div>
-      <!-- <div data-ng-controller="GeoLocController as geoctrl">
-        <button type="submit">Click to find parks near you</button>
-      </div> -->
-      <!-- <script src="./geo.js"></script> -->
-      <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-      <script src="./leaflet.js"></script>
 
     <main ng-view>
       PROCESSING
     </main>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="./leaflet.js"></script>
     <script src="./bundle.js"></script>
   </body>
 </html>
