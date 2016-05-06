@@ -11,7 +11,7 @@ var paths = ['*.js', 'test/*.js', 'models/*.js'];
 var sources = {
   html: __dirname + '/app/layout/*.html',
   js:   __dirname + '/app/index.js',
-  test: __dirname + '/test/*_spec.js',
+  test: __dirname + '/test/unit/*-spec.js',
   css:  __dirname + '/app/style/*.css',
   font: __dirname + '/app/style/fonts/**/*',
   img:  __dirname + '/app/style/images/*.jpg',
@@ -105,7 +105,7 @@ gulp.task('copyfonts', function() {
 gulp.task('bundle:test', () => {
   return gulp.src(sources.test)
   .pipe(webpack({output: {filename:'test_bundle.js'}}))
-  .pipe(gulp.dest('./test'));
+  .pipe(gulp.dest('./test/unit/'));
 });
 
 gulp.task('default', ['lint', 'webpack', 'bundle:dev', 'copy', 'copycss', 'copygeo', 'images', 'copyfonts']);
